@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	model2 "github.com/0xfbravo/brla/model"
+	"github.com/0xfbravo/brla/model"
 	"io"
 	"net/http"
 
@@ -13,7 +13,7 @@ import (
 
 // Login logs in a super user into BRLA
 // See more: https://brla-superuser-api.readme.io/reference/superuserlogin
-func (u *Impl) Login(email string, password string) (*model2.Session, error) {
+func (u *Impl) Login(email string, password string) (*model.Session, error) {
 	u.log.Info("Logging into BRLA", zap.String("email", email))
 
 	// Parse
@@ -56,14 +56,14 @@ func (u *Impl) Login(email string, password string) (*model2.Session, error) {
 		}
 	}(resp.Body)
 
-	var respMap model2.Login
+	var respMap model.Login
 	if err := json.Unmarshal(respBody, &respMap); err != nil {
 		u.log.Error("Failed to parse response", zap.Error(err), zap.String("response", string(respBody)))
 		return nil, err
 	}
 
 	// Save session
-	newSession := model2.Session{
+	newSession := model.Session{
 		Email:       email,
 		Password:    password,
 		AccessToken: respMap.AccessToken,

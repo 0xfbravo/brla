@@ -23,3 +23,11 @@ go.work.sum
 
 # env file
 .env
+
+# Goland
+*.iml
+.idea/
+!.idea/.name
+!.idea/compiler.xml
+!.idea/modules.xml
+!.idea/vcs.xml

@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/0xfbravo/brla/enum"
-	model2 "github.com/0xfbravo/brla/model"
+	"github.com/0xfbravo/brla/model"
 	"io"
 	"net/http"
 	"strings"
@@ -21,7 +21,7 @@ import (
 // - https://brla-superuser-api.readme.io/reference/superuserkycpjlevel1
 // - https://brla-superuser-api.readme.io/reference/passkyclevel1 (Sandbox only)
 // - https://brla-superuser-api.readme.io/reference/passkyclevel2 (Sandbox only)
-func (u *Impl) KycLevelOne(options *model2.KycLevelOneOptions) (*model2.KycLevelOne, error) {
+func (u *Impl) KycLevelOne(options *model.KycLevelOneOptions) (*model.KycLevelOne, error) {
 	u.log.Info("Performing KYC Level One on BRLA", zap.Any("options", options))
 
 	// Check session
@@ -102,7 +102,7 @@ func (u *Impl) KycLevelOne(options *model2.KycLevelOneOptions) (*model2.KycLevel
 	}(resp.Body)
 
 	u.log.Info("Handling KYC Level One response", zap.String("response", string(respBody)))
-	var respMap model2.KycLevelOne
+	var respMap model.KycLevelOne
 	if err := json.Unmarshal(respBody, &respMap); err != nil {
 		u.log.Error("Failed to parse response", zap.Error(err))
 		return nil, err

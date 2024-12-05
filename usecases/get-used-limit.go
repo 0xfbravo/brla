@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	model2 "github.com/0xfbravo/brla/model"
+	"github.com/0xfbravo/brla/model"
 	"io"
 
 	"net/http"
@@ -15,7 +15,7 @@ import (
 // GetUsedLimit retrieves user used limit from BRLA
 // See more:
 // - https://brla-superuser-api.readme.io/reference/superuserusedlimit
-func (u *Impl) GetUsedLimit(taxId string) (*model2.Limits, error) {
+func (u *Impl) GetUsedLimit(taxId string) (*model.Limits, error) {
 	u.log.Info("Retrieving user used limit from BRLA", zap.String("taxId", taxId))
 
 	// Check session
@@ -58,7 +58,7 @@ func (u *Impl) GetUsedLimit(taxId string) (*model2.Limits, error) {
 		}
 	}(resp.Body)
 
-	var respMap model2.UsedLimits
+	var respMap model.UsedLimits
 	if err := json.Unmarshal(respBody, &respMap); err != nil {
 		u.log.Error("Failed to parse response", zap.Error(err), zap.String("response", string(respBody)))
 		return nil, err
