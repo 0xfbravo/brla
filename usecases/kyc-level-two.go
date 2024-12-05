@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	enum2 "github.com/0xfbravo/brla/enum"
+	"github.com/0xfbravo/brla/enum"
 	"github.com/0xfbravo/brla/model"
 	"io"
 	"net/http"
@@ -27,14 +27,14 @@ func (u *Impl) KycLevelTwo(options *model.KycLevelTwoOptions) error {
 		return err
 	}
 
-	if (options.PersonType == enum2.LegalPerson && options.PartnerCpf == nil) || (options.PersonType == enum2.LegalPerson && options.PartnerFullName == nil) {
+	if (options.PersonType == enum.LegalPerson && options.PartnerCpf == nil) || (options.PersonType == enum.LegalPerson && options.PartnerFullName == nil) {
 		u.log.Error("Individual partner CPF and full name are required for Legal Person KYC Level Two", zap.Any("options", options))
 		return errors.New("individual partner CPF and full name are required for Legal Person KYC Level Two")
 	}
 
 	// Parse
 	var body map[string]string
-	if options.PersonType == enum2.Individual {
+	if options.PersonType == enum.Individual {
 		body = map[string]string{
 			"documentType": string(options.Files.DocumentType),
 			"cpf":          options.Document,
@@ -114,7 +114,7 @@ func (u *Impl) KycLevelTwo(options *model.KycLevelTwoOptions) error {
 		return err
 	}
 
-	if options.Files.DocumentType == enum2.RG {
+	if options.Files.DocumentType == enum.RG {
 		err = u.uploadImage(respMap["RGFrontUploadUrl"], options.Files.RGBack)
 		if err != nil {
 			u.log.Error("Failed to upload images rgback", zap.Error(err))

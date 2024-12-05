@@ -16,7 +16,7 @@ import (
 func (u *Impl) GetBalanceOf(options *model.BalanceOfOptions) (*model.BalanceOf, error) {
 	u.log.Info("Retrieving balanceOf(wallet)", zap.Any("options", options))
 
-	tokenAddreses, err := u.GetContractAddress(options.Chain)
+	tokenAddresses, err := u.GetContractAddress(options.Chain)
 	if err != nil {
 		u.log.Error("Failed to get contract address", zap.Error(err))
 		return nil, err
@@ -28,7 +28,7 @@ func (u *Impl) GetBalanceOf(options *model.BalanceOfOptions) (*model.BalanceOf, 
 		return nil, errors.New("failed to connect to the Ethereum client")
 	}
 
-	contractAddress := common.HexToAddress(tokenAddreses.BRLATokenAddress)
+	contractAddress := common.HexToAddress(tokenAddresses.BRLATokenAddress)
 	contract, err := brla.NewBrla(contractAddress, client)
 	if err != nil {
 		u.log.Error("Failed to get contract", zap.Error(err))

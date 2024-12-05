@@ -8,8 +8,7 @@ import (
 )
 
 type Module struct {
-	repository interfaces.Repository
-	UseCases   interfaces.UseCases
+	UseCases interfaces.UseCases
 }
 
 // New creates a new module instance
@@ -27,7 +26,6 @@ func New(
 	r := repository.New(log)
 	u := usecases.New(isProduction, baseUrl, r, log)
 	return Module{
-		repository: r,
-		UseCases:   u,
+		UseCases: u,
 	}
 }
