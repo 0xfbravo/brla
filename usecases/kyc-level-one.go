@@ -7,12 +7,10 @@ import (
 	"fmt"
 	"github.com/0xfbravo/brla/enum"
 	"github.com/0xfbravo/brla/model"
+	"go.uber.org/zap"
 	"io"
 	"net/http"
 	"strings"
-	"time"
-
-	"go.uber.org/zap"
 )
 
 // KycLevelOne performs KYC Level One on BRLA for both Natural and Legal Person
@@ -30,12 +28,8 @@ func (u *Impl) KycLevelOne(options *model.KycLevelOneOptions) (*model.KycLevelOn
 		return nil, err
 	}
 
-	parsedDate, err := time.Parse("2006-01-02", options.Birthdate)
-	if err != nil {
-		u.log.Error("Failed to parse birth date", zap.Error(err))
-		return nil, err
-	}
-	formattedBirthdate := parsedDate.Format("2006-Jan-02")
+	// Format
+	formattedBirthdate := options.Birthdate.Format("2006-Jan-02")
 
 	// Parse
 	var body map[string]string
