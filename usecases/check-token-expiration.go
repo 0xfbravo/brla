@@ -25,7 +25,7 @@ func (u *Impl) checkTokenExpiration(jwtString string) error {
 		}
 
 		if time.Now().After(expirationTime.Time) {
-			u.log.Error("Token has expired")
+			u.log.Warn("Token has expired")
 			return errors.New("token has expired")
 		}
 	}
