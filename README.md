@@ -30,6 +30,7 @@ Please refer to the LICENSE file for licensing details.
 | Change account password        | Change the account password.                                                                                                         | ❌      |
 | Logout                         | Invalidate the current JWT token.                                                                                                    | ❌      |
 | 💸 Buy Static Pix              | Creates a ticket for minting BRLA. Duration can be configured, and extra fees can be paid using an BRLA Account balance if available | ✔️      |
+| 💸 Sell                       | Create sell order with input information | ✔️      |
 | Buy operations history         | Retrieves paginated BRLA buy transactions for user                                                                                   | ❌      |
 | Pix to USD history             | Fetch Pix to USD conversion history                                                                                                  | ❌      |
 | Pix to USD                     | Creates a ticket for buying a dollar stablecoin. Requires a valid token obtained from the fast-quote endpoint                        | ✔️      |
