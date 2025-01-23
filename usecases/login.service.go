@@ -69,6 +69,9 @@ func (u *Impl) Login(email string, password string) (*model.Session, error) {
 		AccessToken: respMap.AccessToken,
 	}
 	err = u.repo.SaveSession(&newSession)
+	if err != nil {
+		u.log.Warn("Failed to save session", zap.Error(err))
+	}
 
 	u.log.Info("BRLA login successful", zap.String("response", string(respBody)))
 	return &newSession, nil
