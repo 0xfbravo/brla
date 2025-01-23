@@ -29,4 +29,8 @@ type UseCases interface {
 	// Login logs in a super user into BRLA
 	// See more: https://brla-superuser-api.readme.io/reference/superuserlogin
 	Login(email string, password string) (*model.Session, error)
+
+	// Sell sells tokens on BRLA
+	// See more: https://brla-superuser-api.readme.io/reference/superusersell
+	Sell(options *model.SellOptions) (*string, error)
 }
