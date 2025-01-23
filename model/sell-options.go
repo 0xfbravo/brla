@@ -12,5 +12,5 @@ type SellOptions struct {
 	ExternalId              string
 	CoverFeeWithBrlaAccount bool
 	Signature               string
-	SignatureDeadline       int
+	SignatureDeadline       int64
 }
