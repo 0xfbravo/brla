@@ -33,7 +33,7 @@ func (u *Impl) Sell(options *model.SellOptions) (*string, error) {
 	}
 	bodyBytes, _ := json.Marshal(payload)
 
-	url := u.baseUrl + "/superuser/sell?taxId=" + options.TaxId
+	url := u.baseUrl + "/v1/superuser/sell?taxId=" + options.TaxId
 	newRequest, err := http.NewRequest("POST", url, bytes.NewBuffer(bodyBytes))
 	if err != nil {
 		u.log.Error("Failed to create sell request on BRLA", zap.Error(err))
