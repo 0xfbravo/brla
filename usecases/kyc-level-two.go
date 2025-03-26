@@ -5,11 +5,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/0xfbravo/brla/enum"
-	"github.com/0xfbravo/brla/model"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/0xfbravo/brla/enum"
+	"github.com/0xfbravo/brla/model"
 
 	"go.uber.org/zap"
 )
@@ -103,7 +104,7 @@ func (u *Impl) KycLevelTwo(options *model.KycLevelTwoOptions) error {
 		return err
 	}
 
-	if u.isProduction {
+	if !u.isProduction {
 		u.log.Warn("Bypassing KYC file upload in sandbox environment", zap.Any("response", respMap))
 		return nil
 	}
